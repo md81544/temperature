@@ -53,10 +53,13 @@ async fn main() {
         location_json.lat, location_json.lon
     );
 
-    let rsp = reqwest::get(query).await.unwrap();
-    let foo = rsp.json::<ResultData>().await.unwrap();
+    let rsp_weather = reqwest::get(query).await.unwrap();
+    let weather_json = rsp_weather.json::<ResultData>().await.unwrap();
     println!(
         "The current temperature for lat {}, lon {} ({}) is {}°C",
-        location_json.lat, location_json.lon, location_json.city, foo.current_weather.temperature
+        location_json.lat,
+        location_json.lon,
+        location_json.city,
+        weather_json.current_weather.temperature
     );
 }
